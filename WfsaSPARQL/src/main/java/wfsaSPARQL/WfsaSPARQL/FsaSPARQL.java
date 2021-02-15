@@ -256,7 +256,7 @@ public class FsaSPARQL {
 						if (((ExprAggregator) vs.getValue()).getAggregator().toString().contains("http://www.fuzzy.org#FAVG")) {
 							Expr arg = ((ExprAggregator) vs.getValue()).getAggregator().getExprList().get(0);
 							Expr agg = fsum(partition, arg,individuals);
-							Expr cc = sum_simple(partition,arg);
+							Expr cc = fcount(partition,individuals);
 							Expr result = new E_Divide(agg,cc);					
 							query.getProject().getExprs().replace(vs.getKey(),result);
 						} 
@@ -513,7 +513,7 @@ public class FsaSPARQL {
 		if (exp.getAggregator().toString().contains("http://www.fuzzy.org#FAVG")) {
 			Expr arg = exp.getAggregator().getExprList().get(0);
 			Expr agg = fsum(partition, arg,individuals);
-			Expr cc = sum_simple(partition,arg);
+			Expr cc = fcount(partition,individuals);
 			Expr result = new E_Divide(agg,cc);
 			return result;
 		} 
@@ -547,7 +547,8 @@ public class FsaSPARQL {
 				
 				if (v==null && !(s==null)) { v=s;}	
 				else
-				{if (!(s==null)) v = new E_Multiply(v,s);}
+				{if (!(s==null)) { v = new E_Multiply(v,s); v = new E_Divide(v,new ExprAggregator(null,new AggCount()).getExpr());}
+				}
 			}
 		}
 		if (v==null) {return NodeValue.makeInteger("0");}
@@ -567,7 +568,7 @@ public class FsaSPARQL {
 					!partition.get(NodeFactory.createVariable(arg.asVar().getVarName())).containsAll(partition.get(p)))
 			{
 				Expr s = sum_simple(partition,new ExprVar(p.getName()));
-				if (!(s==null)) v = new E_Multiply(v,s);
+				if (!(s==null)) {v = new E_Multiply(v,s);  v = new E_Divide(v,new ExprAggregator(null,new AggCount()).getExpr());}
 			}
 		}
 		return v;
@@ -1121,7 +1122,7 @@ public class FsaSPARQL {
 				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" + "PREFIX movie: <http://www.movies.org#>\n"
 				+ "PREFIX f: <http://www.fuzzy.org#>\n" + "SELECT ( f:FCOUNT('*')  as ?total )\n "
 				+ "WHERE { ?s f:type (movie:genre movie:Comedy ?ta) .\n "
-				+ "?k f:type (movie:genre movie:Drama ?tb) . \n " + "?s movie:duration ?t . ?k movie:duration ?d }";
+				+ "?k f:type (movie:genre movie:Drama ?tb) .  \n " + "?s movie:duration ?t . ?k movie:duration ?d }";
 		
 		String Agg2 = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
 				+ "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" + "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
@@ -1172,14 +1173,14 @@ public class FsaSPARQL {
 		// org.apache.log4j.BasicConfigurator.configure(new NullAppender());
 
 		FsaSPARQL fs = new FsaSPARQL();
-		String t = fs.FSAtoSPARQL(Agg6);
+		String t = fs.FSAtoSPARQL(Agg1);
 		System.out.println("ORIGINAL");
-		System.out.println(Agg6);
-		String s2 = fs.SPARQL(movies, t);
+		System.out.println(Agg1);
+		//String s2 = fs.SPARQL(movies, t);
 		System.out.println("TRADUCCI�N");
 		System.out.println(t);
-		System.out.println("RESULTADO");
-		System.out.println(s2);
+		//System.out.println("RESULTADO");
+		//System.out.println(s2);
 
 	};
 };

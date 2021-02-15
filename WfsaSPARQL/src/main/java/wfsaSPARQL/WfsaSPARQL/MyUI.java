@@ -119,7 +119,18 @@ public class MyUI extends UI {
 		editor.setShowPrintMargin(false);
 		editor.setUseSoftTabs(false);
 		
-		String Agg1 = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+		String Mov1 = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+				+ "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" 
+				+ "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
+				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" 
+				+ "PREFIX movie: <http://www.movies.org#>\n"
+				+ "PREFIX f: <http://www.fuzzy.org#>\n" 
+				+ "SELECT ( f:FCOUNT('*')  as ?total )\n"
+				+ "WHERE {\n"
+				+ "?s f:type (movie:genre movie:Comedy ?ta) \n"
+				+ "}";
+		
+		String Mov2 = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
 				+ "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" 
 				+ "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
 				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" 
@@ -128,12 +139,22 @@ public class MyUI extends UI {
 				+ "SELECT ( f:FCOUNT('*')  as ?total )\n"
 				+ "WHERE {\n"
 				+ "?s f:type (movie:genre movie:Comedy ?ta) .\n"
-				+ "?k f:type (movie:genre movie:Drama ?tb) . \n" 
-				+ "?s movie:duration ?t .\n"
-				+ "?k movie:duration ?d \n"
+				+ "?s f:type (movie:genre movie:Drama ?tb) \n" 
 				+ "}";
 		
-		String Agg2 = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+		String Mov3 = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+				+ "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" 
+				+ "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
+				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" 
+				+ "PREFIX movie: <http://www.movies.org#>\n"
+				+ "PREFIX f: <http://www.fuzzy.org#>\n" 
+				+ "SELECT ( f:FCOUNT('*')  as ?total )\n"
+				+ "WHERE {\n"
+				+ "?s f:type (movie:genre movie:Comedy ?ta) .\n"
+				+ "?k f:type (movie:genre movie:Drama ?tb) \n" 
+				+ "}";
+		
+		String Mov4 = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
 				+ "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" 
 				+ "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
 				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" 
@@ -146,7 +167,7 @@ public class MyUI extends UI {
 				+ "}\n"
 				+ "GROUP BY ?s";
 		
-		String Agg3 = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+		String Mov5 = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
 				+ "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" 
 				+ "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
 				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" 
@@ -161,44 +182,23 @@ public class MyUI extends UI {
 				+ "GROUP BY ?d \n"
 				+ "HAVING (f:FSUM(?t) > 100)";
 		
-		String Agg4 = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
-				+ "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" 
-				+ "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
-				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" 
-				+ "PREFIX movie: <http://www.movies.org#>\n"
-				+ "PREFIX f: <http://www.fuzzy.org#>\n" 
-				+ "SELECT ?c  ?total \n"
-				+ "WHERE {\n"
-				+ "{\n"
-				+ "SELECT ?c (f:FSUM(?t) as ?total) \n"
-				+ "WHERE {\n"
-				+ "?s f:type (movie:genre ?c ?ta) .\n"
-				+ "?s movie:duration ?t \n"
-				+ "}\n"
-				+ "GROUP BY ?c\n"
-				+ "}\n"
-				+ "}";
+		 
 		
-		String Agg5 = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+		String Mov6 = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
 				+ "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" 
 				+ "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
 				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" 
 				+ "PREFIX movie: <http://www.movies.org#>\n"
 				+ "PREFIX f: <http://www.fuzzy.org#>\n" 
-				+ "SELECT ?c  ?total \n"
-				+ "WHERE {\n"
-				+ "{\n"
 				+ "SELECT ?c (f:FAVG(?t) as ?total) \n"
 				+ "WHERE {\n"
 				+ "?s f:type (movie:genre ?c ?ta) .\n"
 				+ "?s movie:duration ?t\n"
 				+ "}\n"
-				+ "GROUP BY ?c\n"
-				+ "}\n"
-				+ "}";
+				+ "GROUP BY ?c\n";
 		
 		
-		String Agg6 = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+		String Mov7 = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
 				+ "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" 
 				+ "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
 				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" 
@@ -217,31 +217,42 @@ public class MyUI extends UI {
 				+ "}\n"
 				+ "}\n"
 				+ "}";
-
-		String prog1 = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\n" + 
-				"PREFIX owl: <http://www.w3.org/2002/07/owl#>\r\n" + 
-				"PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\r\n" + 
-				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n" + 
-				"PREFIX fd: <http://www.semanticweb.org/food#>\r\n" + 
-				"PREFIX f: <http://www.fuzzy.org#>\r\n" + 
-				"SELECT ?s ?ta   \r\n" + 
-				"WHERE {\r\n" + 
-				"?s f:type (fd:taste fd:sweet ?ta) .\r\n" + 
-				"}";
 		
-		String prog2 = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\n" + 
-				"PREFIX owl: <http://www.w3.org/2002/07/owl#>\r\n" + 
-				"PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\r\n" + 
-				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n" + 
-				"PREFIX fd: <http://www.semanticweb.org/food#>\r\n" + 
-				"PREFIX f: <http://www.fuzzy.org#>\r\n" + 
-				"SELECT ?d ?c (f:FCOUNT('*') as ?total)  \r\n" + 
+		String Mov8=
+				"PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+						+ "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" 
+						+ "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
+						+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" 
+						+ "PREFIX movie: <http://www.movies.org#>\n"
+						+ "PREFIX f: <http://www.fuzzy.org#>\n" +
+				"SELECT ?fs (f:FCOUNT('*') as ?total)\r\n" + 
 				"WHERE {\r\n" + 
-				"?s f:type (?d ?c ?ta) .\r\n" + 
-				"}\r\n" + 
-				"GROUP BY ?c ?d";
-		/*
-		String prog2 = "PREFIX movie: <http://www.movies.org#>\r\n"
+				"?Movie f:type (movie:genre ?fs ?t) }\r\n"+
+				"GROUP BY ?fs\r\n" + 
+				"HAVING (f:FCOUNT('*')>=4)";
+		
+		
+		
+		String Mov9=
+				"PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+						+ "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" 
+						+ "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
+						+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" 
+						+ "PREFIX movie: <http://www.movies.org#>\n"
+						+ "PREFIX f: <http://www.fuzzy.org#>\n" +
+				"SELECT ?s\r\n" + 
+				"WHERE {\r\n" + 
+				"?s f:type (movie:genre movie:Comedy ?ts) .\r\n" +
+				"?s movie:duration ?ds .\r\n" + 
+				"FILTER (f:WEIGHT(?ds)=?max) .\r\n" + 
+				"{\r\n" + 
+				"SELECT (f:FMAX(?dk) as ?max)\r\n" + 
+				"WHERE {\r\n" + 
+				"?k f:type (movie:genre movie:Comedy ?tk) .\r\n " +
+				"?k movie:duration ?dk}\r\n" + 
+				"}}\r\n";
+		
+		String Mov10 = "PREFIX movie: <http://www.movies.org#>\r\n"
 				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n"
 				+ "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\n"
 				+ "PREFIX f: <http://www.fuzzy.org#>\r\n" 
@@ -255,57 +266,23 @@ public class MyUI extends UI {
 				+ "BIND(l:AND_PROD(?r,?l) as ?Rank) . \r\n"
 				+ "FILTER (?Rank > 0.3)\n"
 				+ "}";
-		*/
-		
-		String prog3 ="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\n" + 
-				"PREFIX owl: <http://www.w3.org/2002/07/owl#>\r\n" + 
-				"PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\r\n" + 
-				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n" + 
-				"PREFIX fd: <http://www.semanticweb.org/food#>\r\n" + 
-				"PREFIX f: <http://www.fuzzy.org#>\r\n" + 
-				"SELECT ?d ?c (f:FSUM(?t) as ?total)  \r\n" + 
-				"WHERE {\r\n" + 
-				"?s f:type (?d ?c ?ta) .\r\n" + 
-				"?s fd:time ?t\r\n" + 
-				"}\r\n" + 
-				"GROUP BY ?c ?d";
 
-		/*String prog3 = "PREFIX hotel: <http://www.hotels.org#>\r\n"
-				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n"
-				+ "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\n"
-				+ "PREFIX f: <http://www.fuzzy.org#>\r\n" 
-				+ "PREFIX l: <http://www.lattice.org#>\r\n"
-				+ "SELECT ?Name ?d  \r\n" 
-				+ "WHERE {\n"
-				+ "?Hotel hotel:name ?Name . \r\n"
-				+ "?Hotel rdf:type hotel:Hotel . \r\n"
-				+ "{\n"
-				+ "SELECT ?Hotel ?g ?e\n"
-				+ "WHERE\n"
-				+ "{\n"
-				+ "?Hotel f:type (hotel:quality hotel:Good ?g) . \r\n"
-				+ "?Hotel f:type (hotel:style hotel:Elegant ?e)}\n"
-				+ "} .\r\n"
-				+ "BIND(l:AND_PROD(?g,?e) as ?d) .\r\n"
-				+ "FILTER (?d > 0.2)\n"
-				+ "}";
-				*/
-		
-		String prog4 ="PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\n" + 
-				"PREFIX owl: <http://www.w3.org/2002/07/owl#>\r\n" + 
-				"PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\r\n" + 
-				"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n" + 
-				"PREFIX fd: <http://www.semanticweb.org/food#>\r\n" + 
-				"PREFIX f: <http://www.fuzzy.org#>\r\n" + 
-				"SELECT ?s (f:FMAX(?t) as ?total)  \r\n" + 
+		String Hot1=
+				"PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
+						+ "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n" 
+						+ "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
+						+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n" 
+						+ "PREFIX hotel: <http://www.hotels.org#>\n"
+						+ "PREFIX f: <http://www.fuzzy.org#>\n" +
+				"SELECT ?q ?d (f:FAVG(?p) as ?total)\r\n"+
 				"WHERE {\r\n" + 
-				"?s f:type (fd:taste fd:sweet ?ta) .\r\n" + 
-				"?s fd:time ?t\r\n" + 
-				"}\r\n" + 
-				"GROUP BY ?s";
-
-		/*
-		String prog4 = "PREFIX hotel: <http://www.hotels.org#>\r\n"
+				"?s f:type (hotel:quality ?q ?ta) .\r\n" + 
+				"?s hotel:price ?p .\r\n" +
+				"BIND(IF(?ta>0.5,'high','low') AS ?d) }\r\n" +
+				"GROUP BY ?d ?q\r\n";
+		
+		
+		String Hot2 = "PREFIX hotel: <http://www.hotels.org#>\r\n"
 				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n"
 				+ "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\n"
 				+ "PREFIX f: <http://www.fuzzy.org#>\r\n" 
@@ -318,9 +295,9 @@ public class MyUI extends UI {
 				+ "?pi hotel:name \"Empire State Building\" \r\n" 
 				+ "FILTER (?l > 0.75)\n"
 				+ "}";
-			*/
+			
 
-		String prog5 = "PREFIX hotel: <http://www.hotels.org#>\r\n"
+		String Hot3 = "PREFIX hotel: <http://www.hotels.org#>\r\n"
 				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n"
 				+ "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\n"
 				+ "PREFIX f: <http://www.fuzzy.org#>\r\n" 
@@ -332,7 +309,7 @@ public class MyUI extends UI {
 				+ "BIND(l:AT_MOST(?p,200,300) as ?d)\n"
 				+ "}";
 
-		String prog6 = "PREFIX hotel: <http://www.hotels.org#>\r\n"
+		String Hot4 = "PREFIX hotel: <http://www.hotels.org#>\r\n"
 				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n"
 				+ "PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\n"
 				+ "PREFIX f: <http://www.fuzzy.org#>\r\n" 
@@ -349,7 +326,7 @@ public class MyUI extends UI {
 				+ "FILTER(?d > 0.4)\n"
 				+ "}";
 
-		String prog7 = "PREFIX hotel: <http://www.hotels.org#>\r\n"
+		String Hot5 = "PREFIX hotel: <http://www.hotels.org#>\r\n"
 				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n"
 				+ "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\n"
 				+ "PREFIX f: <http://www.fuzzy.org#>\r\n" 
@@ -369,7 +346,7 @@ public class MyUI extends UI {
 				+ "FILTER(?l >0.7)\n"
 				+ "}";
 
-		String prog8 = "PREFIX hotel: <http://www.hotels.org#>\r\n"
+		String Hot6 = "PREFIX hotel: <http://www.hotels.org#>\r\n"
 				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n"
 				+ "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\n"
 				+ "PREFIX f: <http://www.fuzzy.org#>\r\n" 
@@ -390,7 +367,7 @@ public class MyUI extends UI {
 				+ "}\n"
 				+ "}";
 
-		String prog9 = "PREFIX hotel: <http://www.hotels.org#>\r\n"
+		String Hot7 = "PREFIX hotel: <http://www.hotels.org#>\r\n"
 				+ "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n"
 				+ "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\n"
 				+ "PREFIX f: <http://www.fuzzy.org#>\r\n" 
@@ -416,9 +393,10 @@ public class MyUI extends UI {
 
 		ComboBox<String> examples = new ComboBox<>("Select an Example");
 		examples.setItems("Example 1", "Example 2", "Example 3", "Example 4", "Example 5", "Example 6",
-				"Example 7","Example 8", "Example 9", "Example 10","Example 11","Example 12", "Example 13", "Example 14","Example 15");
+				"Example 7","Example 8", "Example 9", "Example 10","Example 11","Example 12", "Example 13", "Example 14",
+				"Example 15","Example 16","Example 17");
 
-		examples.setPageLength(15);
+		examples.setPageLength(18);
 		examples.setWidth("100%");
 		examples.addValueChangeListener(event -> {
 			if (event.getSource().isEmpty()) {
@@ -426,60 +404,68 @@ public class MyUI extends UI {
 			} else {
 				if (event.getValue() == "Example 1") {
 					file.setValue("http://minerva.ual.es:8080/fsa/movies-fuzzy.rdf");
-					editor.setValue(Agg1);
+					editor.setValue(Mov1);
 				} else if (event.getValue() == "Example 2") {
 					file.setValue("http://minerva.ual.es:8080/fsa/movies-fuzzy.rdf");
-					editor.setValue(Agg2);
+					editor.setValue(Mov2);
 				} else if (event.getValue() == "Example 3") {
 					file.setValue("http://minerva.ual.es:8080/fsa/movies-fuzzy.rdf");
-					editor.setValue(Agg3);
+					editor.setValue(Mov3);
 				} else if (event.getValue() == "Example 4") {
 					file.setValue("http://minerva.ual.es:8080/fsa/movies-fuzzy.rdf");
-					editor.setValue(Agg4);
+					editor.setValue(Mov4);
 				} else if (event.getValue() == "Example 5") {
 					file.setValue("http://minerva.ual.es:8080/fsa/movies-fuzzy.rdf");
-					editor.setValue(Agg5);
+					editor.setValue(Mov5);
 				} else if (event.getValue() == "Example 6") {
 					file.setValue("http://minerva.ual.es:8080/fsa/movies-fuzzy.rdf");
-					editor.setValue(Agg6);
+					editor.setValue(Mov6);
 				} else if (event.getValue() == "Example 7") {
-					file.setValue("http://minerva.ual.es:8080/fsa/food-fuzzy.rdf");
-					editor.setValue(prog1);
+					file.setValue("http://minerva.ual.es:8080/fsa/movies-fuzzy.rdf");
+					editor.setValue(Mov7);
 				} else if (event.getValue() == "Example 8") {
-					file.setValue("http://minerva.ual.es:8080/fsa/food-fuzzy.rdf");
-					editor.setValue(prog2);
+					file.setValue("http://minerva.ual.es:8080/fsa/movies-fuzzy.rdf");
+					editor.setValue(Mov8);
 				} else if (event.getValue() == "Example 9") {
-					file.setValue("http://minerva.ual.es:8080/fsa/food-fuzzy.rdf");
-					editor.setValue(prog3);
+					file.setValue("http://minerva.ual.es:8080/fsa/movies-fuzzy.rdf");
+					editor.setValue(Mov9);
 				} else if (event.getValue() == "Example 10") {
-					file.setValue("http://minerva.ual.es:8080/fsa/food-fuzzy.rdf");
-					editor.setValue(prog4);
+					file.setValue("http://minerva.ual.es:8080/fsa/movies-fuzzy.rdf");
+					editor.setValue(Mov10);
 				} else if (event.getValue() == "Example 11") {
 				file.setValue("http://minerva.ual.es:8080/fsa/hotels-fuzzy.rdf");
-				editor.setValue(prog5);
+				editor.setValue(Hot1);
 				}
 				else if (event.getValue() == "Example 12") {
-					file.setValue("http://minerva.ual.es:8080/fsa/hotels.rdf");
-					editor.setValue(prog6);
+					file.setValue("http://minerva.ual.es:8080/fsa/hotels-fuzzy.rdf");
+					editor.setValue(Hot2);
 					}
 				else if (event.getValue() == "Example 13") {
-					file.setValue("http://minerva.ual.es:8080/fsa/hotels.rdf");
-					editor.setValue(prog7);
+					file.setValue("http://minerva.ual.es:8080/fsa/hotels-fuzzy.rdf");
+					editor.setValue(Hot3);
 					}
 				else if (event.getValue() == "Example 14") {
-					file.setValue("http://minerva.ual.es:8080/fsa/hotels.rdf");
-					editor.setValue(prog8);
+					file.setValue("http://minerva.ual.es:8080/fsa/hotels-fuzzy.rdf");
+					editor.setValue(Hot4);
 					}
 				else if (event.getValue() == "Example 15") {
-					file.setValue("http://minerva.ual.es:8080/fsa/hotels.rdf");
-					editor.setValue(prog9);
+					file.setValue("http://minerva.ual.es:8080/fsa/hotels-fuzzy.rdf");
+					editor.setValue(Hot5);
+					}
+				else if (event.getValue() == "Example 16") {
+					file.setValue("http://minerva.ual.es:8080/fsa/hotels-fuzzy.rdf");
+					editor.setValue(Hot6);
+					}
+				else if (event.getValue() == "Example 17") {
+					file.setValue("http://minerva.ual.es:8080/fsa/hotels-fuzzy.rdf");
+					editor.setValue(Hot7);
 					}
 
 			}
 		});
 		
 
-		editor.setValue(Agg1);
+		editor.setValue(Mov1);
 		editor.setDescription("FSA-SPARQL Query");
 
 		AceEditor editorP = new AceEditor();
