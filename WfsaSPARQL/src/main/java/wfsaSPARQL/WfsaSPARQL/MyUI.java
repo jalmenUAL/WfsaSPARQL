@@ -92,7 +92,7 @@ public class MyUI extends UI {
 		Label ds = new Label("RDF Dataset");
 		TextField file = new TextField();
 		file.setSizeFull();
-		file.setValue("file:///C:/movies-fuzzy.rdf");
+		file.setValue("http://minerva.ual.es:8080/fsa/movies-fuzzy.rdf");
 		
 		Label fsaq = new Label("FSA-SPARQL Query");
 		Label cv = new Label("SPARQL Crisp Version");
@@ -425,58 +425,59 @@ public class MyUI extends UI {
 				show_error("Warning","No example selected");
 			} else {
 				if (event.getValue() == "Example 1") {
-					file.setValue("file:///C:/movies-fuzzy.rdf");
+					file.setValue("http://minerva.ual.es:8080/fsa/movies-fuzzy.rdf");
 					editor.setValue(Agg1);
 				} else if (event.getValue() == "Example 2") {
-					file.setValue("file:///C:/movies-fuzzy.rdf");
+					file.setValue("http://minerva.ual.es:8080/fsa/movies-fuzzy.rdf");
 					editor.setValue(Agg2);
 				} else if (event.getValue() == "Example 3") {
-					file.setValue("file:///C:/movies-fuzzy.rdf");
+					file.setValue("http://minerva.ual.es:8080/fsa/movies-fuzzy.rdf");
 					editor.setValue(Agg3);
 				} else if (event.getValue() == "Example 4") {
-					file.setValue("file:///C:/movies-fuzzy.rdf");
+					file.setValue("http://minerva.ual.es:8080/fsa/movies-fuzzy.rdf");
 					editor.setValue(Agg4);
 				} else if (event.getValue() == "Example 5") {
-					file.setValue("file:///C:/movies-fuzzy.rdf");
+					file.setValue("http://minerva.ual.es:8080/fsa/movies-fuzzy.rdf");
 					editor.setValue(Agg5);
 				} else if (event.getValue() == "Example 6") {
-					file.setValue("file:///C:/movies-fuzzy.rdf");
+					file.setValue("http://minerva.ual.es:8080/fsa/movies-fuzzy.rdf");
 					editor.setValue(Agg6);
 				} else if (event.getValue() == "Example 7") {
-					file.setValue("file:///C:/food-fuzzy.rdf");
+					file.setValue("http://minerva.ual.es:8080/fsa/food-fuzzy.rdf");
 					editor.setValue(prog1);
 				} else if (event.getValue() == "Example 8") {
-					file.setValue("file:///C:/food-fuzzy.rdf");
+					file.setValue("http://minerva.ual.es:8080/fsa/food-fuzzy.rdf");
 					editor.setValue(prog2);
 				} else if (event.getValue() == "Example 9") {
-					file.setValue("file:///C:/food-fuzzy.rdf");
+					file.setValue("http://minerva.ual.es:8080/fsa/food-fuzzy.rdf");
 					editor.setValue(prog3);
 				} else if (event.getValue() == "Example 10") {
-					file.setValue("file:///C:/food-fuzzy.rdf");
+					file.setValue("http://minerva.ual.es:8080/fsa/food-fuzzy.rdf");
 					editor.setValue(prog4);
 				} else if (event.getValue() == "Example 11") {
-				file.setValue("file:///C:/hotels-fuzzy.rdf");
+				file.setValue("http://minerva.ual.es:8080/fsa/hotels-fuzzy.rdf");
 				editor.setValue(prog5);
 				}
 				else if (event.getValue() == "Example 12") {
-					file.setValue("file:///C:/hotels.rdf");
+					file.setValue("http://minerva.ual.es:8080/fsa/hotels.rdf");
 					editor.setValue(prog6);
 					}
 				else if (event.getValue() == "Example 13") {
-					file.setValue("file:///C:/hotels.rdf");
+					file.setValue("http://minerva.ual.es:8080/fsa/hotels.rdf");
 					editor.setValue(prog7);
 					}
 				else if (event.getValue() == "Example 14") {
-					file.setValue("file:///C:/hotels.rdf");
+					file.setValue("http://minerva.ual.es:8080/fsa/hotels.rdf");
 					editor.setValue(prog8);
 					}
 				else if (event.getValue() == "Example 15") {
-					file.setValue("file:///C:/hotels.rdf");
+					file.setValue("http://minerva.ual.es:8080/fsa/hotels.rdf");
 					editor.setValue(prog9);
 					}
 
 			}
 		});
+		
 
 		editor.setValue(Agg1);
 		editor.setDescription("FSA-SPARQL Query");
